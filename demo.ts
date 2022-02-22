@@ -45,15 +45,15 @@ instance.interceptors.response.use((response: any) => {
       msg: error.message || 'network error',
     });
   } else {
-    // 不需要 axios-retry 时直接将数据返回
     const { status } = response;
-
+    
     // 与后端协商 code 码
     if (status) {
       unifiedError(response);
       return Promise.resolve(response.data);;
     }
-
+    
+    // 不需要 axios-retry 时直接将数据返回
     return Promise.resolve(response);
   }
   
